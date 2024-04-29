@@ -17,12 +17,18 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        
-      - name: Build site
-        run: cd api
           
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
+
+      - name: Enter dir and deploy
+        uses: serverless/github-action@v3.2
+        with:
+          args: -c "cd ./api && serverless deploy"
+          entrypoint: /bin/sh
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 #      - name: serverless deploy
 #        uses: serverless/github-action@v3.2
