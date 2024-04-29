@@ -15,11 +15,15 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-        
       - name: Install dependencies
         run: npm ci
+        
+      - name: Build site
+        run: cd api
+          
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+
 #      - name: serverless deploy
 #        uses: serverless/github-action@v3.2
 #        with:
